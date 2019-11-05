@@ -27,7 +27,7 @@ func buildQualityOption(imageType string, quality uint) map[int]int {
 
 func ensureDir(fp string) error {
 	dir := filepath.Dir(fp)
-	return os.MkdirAll(dir, 755)
+	return os.MkdirAll(dir, 0700)
 }
 
 func main() {
