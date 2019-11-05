@@ -155,6 +155,11 @@ func main() {
 
 	_ = ensureDir(outputFilename)
 
+	if len(inputBuf) < len(outputImg) {
+		outputImg = inputBuf
+		fmt.Printf("origin file size < processed, use origin, copy %s -> %s\n", inputFilename, outputFilename)
+	}
+
 	err = ioutil.WriteFile(outputFilename, outputImg, 0600)
 	if err != nil {
 		fmt.Printf("error writing out resized image, %s\n", err)
