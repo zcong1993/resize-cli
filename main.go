@@ -34,6 +34,7 @@ func main() {
 		stretch        bool
 		quality        uint
 		force          bool
+		replace        bool
 	)
 
 	flag.StringVar(&inputFilename, "input", "", "name of input file to resize/transcode")
@@ -43,12 +44,18 @@ func main() {
 	flag.BoolVar(&stretch, "stretch", false, "perform stretching resize instead of cropping")
 	flag.UintVar(&quality, "quality", 80, "image compress quality")
 	flag.BoolVar(&force, "force", false, "false replace output file")
+	flag.BoolVar(&replace, "replace", false, "if replace input file")
 	flag.Parse()
 
 	if inputFilename == "" {
 		fmt.Printf("No input filename provided, quitting.\n")
 		flag.Usage()
 		os.Exit(1)
+	}
+
+	if replace {
+		force = true
+		outputFilename = inputFilename
 	}
 
 	if _, err := os.Stat(outputFilename); !os.IsNotExist(err) && !force {
