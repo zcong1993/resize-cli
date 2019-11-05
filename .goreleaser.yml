@@ -3,7 +3,6 @@ builds:
     binary: resize-cli
     ldflags: -s -w -X main.GitCommit={{.Commit}} -X main.Date={{.Date}}
     goos:
-      - windows
       - darwin
       - linux
     goarch:
