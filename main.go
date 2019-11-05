@@ -25,6 +25,11 @@ func buildQualityOption(imageType string, quality uint) map[int]int {
 	}
 }
 
+func ensureDir(fp string) error {
+	dir := filepath.Dir(fp)
+	return os.MkdirAll(dir, 755)
+}
+
 func main() {
 	var (
 		inputFilename  string
@@ -147,6 +152,8 @@ func main() {
 	if outputFilename == "" {
 		outputFilename = "resized" + filepath.Ext(inputFilename)
 	}
+
+	_ = ensureDir(outputFilename)
 
 	err = ioutil.WriteFile(outputFilename, outputImg, 0600)
 	if err != nil {
