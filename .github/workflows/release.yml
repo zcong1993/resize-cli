@@ -10,6 +10,7 @@ jobs:
     steps:
       - name: install deps
         run: |
+          apt-get install autoconf libtool nasm
           curl -sL https://raw.githubusercontent.com/discordapp/lilliput/master/deps/build-deps-linux.sh | bash
       - name: Checkout
         uses: actions/checkout@master
