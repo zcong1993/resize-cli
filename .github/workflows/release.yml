@@ -8,15 +8,15 @@ jobs:
   goreleaser:
     runs-on: ubuntu-latest
     steps:
+      - name: install deps
+        run: |
+          curl -sL https://raw.githubusercontent.com/discordapp/lilliput/master/deps/build-deps-linux.sh | bash
       - name: Checkout
         uses: actions/checkout@master
       - name: Set up Go
         uses: actions/setup-go@master
         with:
           go-version: 1.13
-      - name: install deps
-        run: |
-          curl -sL https://github.com/discordapp/lilliput/blob/master/deps/build-deps-linux.sh | bash
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v1
         with:
